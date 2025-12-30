@@ -5,29 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hyunwoo Kim | AGI Researcher</title>
     <meta name="description" content="AGI Researcher, Builder, Open Source Advocate">
+    <meta name="keywords" content="AGI, AI, Machine Learning, Robotics, TSN, Neural Networks">
+    <meta property="og:title" content="Hyunwoo Kim | AGI Researcher">
+    <meta property="og:description" content="Building the future of artificial general intelligence">
+    <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0a;
-            --bg-secondary: #111111;
-            --text: #e5e5e5;
-            --text-secondary: #888888;
+            --bg: #09090b;
+            --bg-secondary: #18181b;
+            --bg-tertiary: #27272a;
+            --text: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
             --accent: #3b82f6;
-            --accent-hover: #60a5fa;
-            --border: #222222;
-            --card-bg: #151515;
+            --accent-secondary: #8b5cf6;
+            --green: #22c55e;
+            --yellow: #f59e0b;
+            --red: #ef4444;
+            --border: #27272a;
+            --card-bg: #18181b;
+            --gradient-1: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            --gradient-2: linear-gradient(135deg, #22c55e, #3b82f6);
         }
 
         [data-theme="light"] {
-            --bg: #fafafa;
-            --bg-secondary: #ffffff;
-            --text: #171717;
-            --text-secondary: #525252;
-            --accent: #2563eb;
-            --accent-hover: #1d4ed8;
-            --border: #e5e5e5;
+            --bg: #ffffff;
+            --bg-secondary: #f4f4f5;
+            --bg-tertiary: #e4e4e7;
+            --text: #18181b;
+            --text-secondary: #52525b;
+            --text-muted: #a1a1aa;
+            --border: #e4e4e7;
             --card-bg: #ffffff;
         }
 
@@ -37,195 +48,464 @@
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.7;
-            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 720px;
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            transition: all 0.3s;
+        }
+
+        [data-theme="light"] nav {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .nav-container {
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 4rem 2rem;
-        }
-
-        header {
-            margin-bottom: 4rem;
-        }
-
-        .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
         }
 
-        .avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent), #8b5cf6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 600;
-        }
-
-        .theme-toggle {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 0.5rem;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.2s;
-        }
-
-        .theme-toggle:hover {
-            border-color: var(--accent);
-        }
-
-        h1 {
-            font-size: 2.5rem;
+        .nav-logo {
             font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, var(--text), var(--accent));
+            font-size: 1.2rem;
+            background: var(--gradient-1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .tagline {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
         }
 
-        .intro {
-            font-size: 1.1rem;
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .theme-toggle {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+
+        .theme-toggle:hover {
+            background: var(--bg-tertiary);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.85rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
         }
 
-        .social-links {
+        .hero-badge .dot {
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--text) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 span {
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-links {
             display: flex;
             gap: 1rem;
+            justify-content: center;
             flex-wrap: wrap;
         }
 
-        .social-links a {
-            color: var(--text-secondary);
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 500;
             text-decoration: none;
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 0.9rem;
             transition: all 0.2s;
+            font-size: 0.95rem;
         }
 
-        .social-links a:hover {
-            border-color: var(--accent);
-            color: var(--accent);
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
         }
 
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px -10px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--text-muted);
+        }
+
+        /* Section Common */
         section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
             margin-bottom: 4rem;
         }
 
-        h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
-        h2::before {
-            content: '';
-            width: 4px;
-            height: 1.5rem;
-            background: var(--accent);
-            border-radius: 2px;
+        .section-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
+        /* Research Section */
         .research-grid {
             display: grid;
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
-        .research-item {
+        .research-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            transition: all 0.2s;
+            border-radius: 16px;
+            padding: 2rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .research-item:hover {
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .research-card:hover {
+            transform: translateY(-4px);
             border-color: var(--accent);
-            transform: translateY(-2px);
         }
 
-        .research-item h3 {
-            font-size: 1.1rem;
+        .research-card:hover::before {
+            opacity: 1;
+        }
+
+        .research-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-card h3 {
+            font-size: 1.2rem;
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text);
+            margin-bottom: 0.75rem;
         }
 
-        .research-item p {
+        .research-card p {
             color: var(--text-secondary);
             font-size: 0.95rem;
         }
 
-        .research-item .tag {
-            display: inline-block;
-            background: var(--accent);
-            color: white;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            margin-bottom: 0.75rem;
+        /* Globe Section */
+        .globe-section {
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            padding: 3rem;
+            margin: 4rem auto;
+            max-width: 1000px;
         }
 
+        .globe-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .globe-header h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .globe-stats {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .globe-stat {
+            text-align: center;
+        }
+
+        .globe-stat .number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .globe-stat .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        #globe {
+            width: 100%;
+            height: 450px;
+            cursor: grab;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        #globe:active {
+            cursor: grabbing;
+        }
+
+        .country-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .country-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .country-tag.home {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .country-tag.visited {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .country-tag.wishlist {
+            border-color: var(--yellow);
+            color: var(--yellow);
+        }
+
+        /* Projects Section */
         .projects-grid {
             display: grid;
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 1.5rem;
         }
 
         .project-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 16px;
             padding: 1.5rem;
             text-decoration: none;
             color: inherit;
-            transition: all 0.2s;
-            display: block;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card:hover {
+            transform: translateY(-4px);
             border-color: var(--accent);
-            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            font-size: 2rem;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .project-link {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .project-link:hover {
+            background: var(--accent);
+            color: white;
         }
 
         .project-card h3 {
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         .project-card p {
             color: var(--text-secondary);
             font-size: 0.9rem;
+            flex-grow: 1;
             margin-bottom: 1rem;
         }
 
@@ -236,349 +516,456 @@
         }
 
         .project-tech span {
-            background: var(--bg);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
+            background: var(--bg-tertiary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
             font-size: 0.75rem;
             font-family: 'JetBrains Mono', monospace;
             color: var(--text-secondary);
         }
 
-        .skills-grid {
+        /* Skills Section */
+        .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
         }
 
         .skill-category h4 {
             font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--text-secondary);
-            margin-bottom: 0.75rem;
-        }
-
-        .skill-category ul {
-            list-style: none;
-        }
-
-        .skill-category li {
-            padding: 0.3rem 0;
-            font-size: 0.95rem;
-        }
-
-        .contact-box {
-            background: linear-gradient(135deg, var(--card-bg), var(--bg-secondary));
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .contact-box p {
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-        }
-
-        .contact-box a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .contact-box a:hover {
-            text-decoration: underline;
-        }
-
-        footer {
-            text-align: center;
-            padding: 2rem;
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-            border-top: 1px solid var(--border);
-        }
-
-        .emoji {
-            font-style: normal;
-        }
-
-        /* Globe / Travel Section */
-        .globe-container {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        #globe {
-            width: 100%;
-            height: 400px;
-            cursor: grab;
-        }
-
-        #globe:active {
-            cursor: grabbing;
-        }
-
-        .travel-stats {
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
             display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .travel-stat {
-            text-align: center;
-        }
-
-        .travel-stat .number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        .travel-stat .label {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-
-        .travel-list {
+        .skill-list {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
-            justify-content: center;
-            margin-top: 1.5rem;
         }
 
-        .travel-list .country {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
+        .skill-tag {
+            background: var(--bg-tertiary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .skill-tag:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            text-align: center;
+            padding: 6rem 2rem;
+            background: var(--bg-secondary);
+            border-radius: 24px;
+            margin: 4rem auto;
+            max-width: 800px;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .contact-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-links {
             display: flex;
-            align-items: center;
-            gap: 0.4rem;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
-        .travel-list .country.visited {
-            border-color: var(--accent);
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+
+        footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
             color: var(--accent);
         }
 
-        .travel-list .country.wishlist {
-            border-color: #f59e0b;
-            color: #f59e0b;
-            opacity: 0.8;
-        }
-
-        @media (max-width: 640px) {
-            .container {
-                padding: 2rem 1rem;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
             }
-            h1 {
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+
+            .section-header h2 {
                 font-size: 2rem;
             }
+
+            .globe-section {
+                padding: 1.5rem;
+            }
+
+            #globe {
+                height: 350px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
         }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <div class="header-top">
-                <div class="avatar">HK</div>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">HK</div>
+            <ul class="nav-links">
+                <li><a href="#research">Research</a></li>
+                <li><a href="#travels">Travels</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-right">
                 <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
                     <span id="theme-icon">🌙</span>
                 </button>
             </div>
-            <h1>Hyunwoo Kim</h1>
-            <p class="tagline">AGI Researcher · Builder · Open Source Advocate</p>
-            <p class="intro">
-                안녕하세요! 저는 <strong>범용 인공지능(AGI)</strong>을 연구하는 개발자입니다.
-                멀티모달 AI, 신경망 아키텍처, 그리고 자율 에이전트 시스템에 관심을 갖고 있습니다.
-                현재 한국에서 활동하며, 오픈소스 AI 생태계에 기여하고 있습니다.
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge animate-in">
+                <span class="dot"></span>
+                <span>Available for collaboration</span>
+            </div>
+            <h1 class="animate-in delay-1">Building the future of<br><span>Artificial General Intelligence</span></h1>
+            <p class="hero-subtitle animate-in delay-2">
+                안녕하세요! 저는 멀티모달 AI, 자율 시스템, 그리고 실시간 네트워킹을 연구하는 개발자입니다.
+                오픈소스와 함께 AGI의 미래를 만들어갑니다.
             </p>
-            <div class="social-links">
-                <a href="https://github.com/hwkim3330" target="_blank">GitHub</a>
-                <a href="https://huggingface.co/kimhyunwoo" target="_blank">Hugging Face</a>
-                <a href="mailto:hwkim3330@gmail.com">Email</a>
+            <div class="hero-links animate-in delay-3">
+                <a href="https://github.com/hwkim3330" target="_blank" class="btn btn-primary">
+                    <span>GitHub</span>
+                    <span>→</span>
+                </a>
+                <a href="https://huggingface.co/kimhyunwoo" target="_blank" class="btn btn-secondary">
+                    🤗 Hugging Face
+                </a>
+                <a href="mailto:hwkim3330@gmail.com" class="btn btn-secondary">
+                    ✉️ Contact
+                </a>
             </div>
-        </header>
+        </div>
+    </section>
 
-        <section id="research">
+    <!-- Research Section -->
+    <section id="research">
+        <div class="section-header">
             <h2>Research Interests</h2>
-            <div class="research-grid">
-                <div class="research-item">
-                    <span class="tag">F1</span>
-                    <h3>Multimodal AGI Architecture</h3>
-                    <p>Vision, Audio, Text를 통합하는 Any-to-Any 모델 아키텍처 연구. HyperCLOVAX, Qwen-Omni 등 분석.</p>
-                </div>
-                <div class="research-item">
-                    <span class="tag">F2</span>
-                    <h3>Efficient Neural Networks</h3>
-                    <p>INT4/INT8 양자화, CPU-GPU 하이브리드 추론, 동적 레이어 로딩을 통한 저사양 환경 최적화.</p>
-                </div>
-                <div class="research-item">
-                    <span class="tag">F3</span>
-                    <h3>Autonomous AI Agents</h3>
-                    <p>도구 사용, 자가 학습, 재귀적 자기 개선이 가능한 에이전트 시스템 개발.</p>
-                </div>
-                <div class="research-item">
-                    <span class="tag">F4</span>
-                    <h3>Time-Sensitive Networking</h3>
-                    <p>IEEE 802.1 TSN 프로토콜 (CBS, TAS, FRER) 연구 및 실시간 네트워크 성능 분석.</p>
-                </div>
+            <p>현재 집중하고 있는 연구 분야들</p>
+        </div>
+        <div class="research-grid">
+            <div class="research-card">
+                <div class="research-icon">🧠</div>
+                <h3>Multimodal AGI</h3>
+                <p>Vision, Audio, Text를 통합하는 Any-to-Any 모델 아키텍처. HyperCLOVAX, GPT-4V, Gemini 분석 및 연구.</p>
             </div>
-        </section>
+            <div class="research-card">
+                <div class="research-icon">🌊</div>
+                <h3>Liquid Neural Networks</h3>
+                <p>MIT CSAIL의 연속 시간 신경망. 적은 파라미터로 시계열 예측 및 제어 문제 해결.</p>
+            </div>
+            <div class="research-card">
+                <div class="research-icon">🤖</div>
+                <h3>Autonomous Agents</h3>
+                <p>도구 사용, 자가 학습, 재귀적 자기 개선이 가능한 AI 에이전트 시스템 개발.</p>
+            </div>
+            <div class="research-card">
+                <div class="research-icon">📡</div>
+                <h3>Time-Sensitive Networking</h3>
+                <p>IEEE 802.1 TSN 프로토콜 (CBS, TAS, FRER) 연구. 실시간 네트워크 성능 최적화.</p>
+            </div>
+            <div class="research-card">
+                <div class="research-icon">⚡</div>
+                <h3>Efficient Inference</h3>
+                <p>INT4/INT8 양자화, CPU-GPU 하이브리드 추론, 동적 레이어 로딩으로 엣지 디바이스 최적화.</p>
+            </div>
+            <div class="research-card">
+                <div class="research-icon">🚗</div>
+                <h3>Autonomous Driving</h3>
+                <p>시뮬레이션 기반 자율주행 안전성 검증. CARLA, NVIDIA Drive Sim 활용.</p>
+            </div>
+        </div>
+    </section>
 
-        <section id="travels">
-            <h2>Travels</h2>
-            <div class="globe-container">
-                <div id="globe"></div>
-                <div class="travel-stats">
-                    <div class="travel-stat">
+    <!-- Travels Section -->
+    <section id="travels">
+        <div class="globe-section">
+            <div class="globe-header">
+                <h3>🌍 Travels</h3>
+                <div class="globe-stats">
+                    <div class="globe-stat">
                         <div class="number">6</div>
                         <div class="label">Countries</div>
                     </div>
-                    <div class="travel-stat">
+                    <div class="globe-stat">
                         <div class="number">2</div>
                         <div class="label">Continents</div>
                     </div>
-                    <div class="travel-stat">
+                    <div class="globe-stat">
                         <div class="number">1</div>
                         <div class="label">Wishlist</div>
                     </div>
                 </div>
-                <div class="travel-list">
-                    <span class="country visited">🇯🇵 Japan</span>
-                    <span class="country visited">🇹🇭 Thailand</span>
-                    <span class="country visited">🇵🇭 Philippines</span>
-                    <span class="country visited">🇨🇿 Czech Republic</span>
-                    <span class="country visited">🇭🇺 Hungary</span>
-                    <span class="country visited">🇦🇹 Austria</span>
-                    <span class="country wishlist">🇺🇸 USA ✨</span>
-                </div>
             </div>
-        </section>
+            <div id="globe"></div>
+            <div class="country-tags">
+                <span class="country-tag home">🇰🇷 South Korea</span>
+                <span class="country-tag visited">🇯🇵 Japan</span>
+                <span class="country-tag visited">🇹🇭 Thailand</span>
+                <span class="country-tag visited">🇵🇭 Philippines</span>
+                <span class="country-tag visited">🇨🇿 Czech Republic</span>
+                <span class="country-tag visited">🇭🇺 Hungary</span>
+                <span class="country-tag visited">🇦🇹 Austria</span>
+                <span class="country-tag wishlist">🇺🇸 USA ✨</span>
+            </div>
+        </div>
+    </section>
 
-        <section id="projects">
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="section-header">
             <h2>Projects</h2>
-            <div class="projects-grid">
-                <a href="https://github.com/hwkim3330/naver" class="project-card" target="_blank">
-                    <h3><span class="emoji">🧠</span> HyperCLOVAX Analysis</h3>
-                    <p>Naver HyperCLOVAX-SEED-Omni-8B 멀티모달 모델 신경망 구조 분석 및 최적화</p>
-                    <div class="project-tech">
-                        <span>PyTorch</span>
-                        <span>Transformers</span>
-                        <span>Mamba2</span>
+            <p>오픈소스 프로젝트와 연구 결과물</p>
+        </div>
+        <div class="projects-grid">
+            <a href="https://github.com/hwkim3330/naver" class="project-card" target="_blank">
+                <div class="project-header">
+                    <span class="project-icon">🧠</span>
+                    <div class="project-links">
+                        <span class="project-link">↗</span>
                     </div>
-                </a>
-                <a href="https://github.com/hwkim3330/lnn" class="project-card" target="_blank">
-                    <h3><span class="emoji">🌊</span> Liquid Neural Networks</h3>
-                    <p>MIT CSAIL의 LNN 구현 - 시계열 예측 및 연속 시간 신경망 연구</p>
-                    <div class="project-tech">
-                        <span>Python</span>
-                        <span>PyTorch</span>
-                        <span>ODE Solver</span>
+                </div>
+                <h3>HyperCLOVAX Analysis</h3>
+                <p>Naver HyperCLOVAX-SEED-Omni-8B 멀티모달 모델의 신경망 구조 분석. INT4 양자화, CPU-GPU 하이브리드 추론 최적화.</p>
+                <div class="project-tech">
+                    <span>PyTorch</span>
+                    <span>Transformers</span>
+                    <span>Mamba2</span>
+                </div>
+            </a>
+            <a href="https://github.com/hwkim3330/lnn" class="project-card" target="_blank">
+                <div class="project-header">
+                    <span class="project-icon">🌊</span>
+                    <div class="project-links">
+                        <span class="project-link">↗</span>
                     </div>
-                </a>
-                <a href="https://github.com/hwkim3330/jetson_robot" class="project-card" target="_blank">
-                    <h3><span class="emoji">🤖</span> Jetson Robot</h3>
-                    <p>NVIDIA Jetson 기반 자율주행 로봇 - ROS2, 카메라, LiDAR 통합</p>
-                    <div class="project-tech">
-                        <span>Jetson</span>
-                        <span>ROS2</span>
-                        <span>CUDA</span>
+                </div>
+                <h3>Liquid Neural Networks</h3>
+                <p>MIT CSAIL의 LNN 구현. 연속 시간 신경망으로 시계열 예측 및 로봇 제어.</p>
+                <div class="project-tech">
+                    <span>Python</span>
+                    <span>PyTorch</span>
+                    <span>ODE Solver</span>
+                </div>
+            </a>
+            <a href="https://github.com/hwkim3330/jetson_robot" class="project-card" target="_blank">
+                <div class="project-header">
+                    <span class="project-icon">🤖</span>
+                    <div class="project-links">
+                        <span class="project-link">↗</span>
                     </div>
-                </a>
-                <a href="https://github.com/hwkim3330/mujoco-web" class="project-card" target="_blank">
-                    <h3><span class="emoji">🎮</span> MuJoCo Web</h3>
-                    <p>브라우저에서 실행되는 MuJoCo 물리 시뮬레이션 - WebAssembly 포팅</p>
-                    <div class="project-tech">
-                        <span>WASM</span>
-                        <span>Three.js</span>
-                        <span>MuJoCo</span>
+                </div>
+                <h3>Jetson Robot</h3>
+                <p>NVIDIA Jetson 기반 자율주행 로봇. ROS2, 스테레오 카메라, LiDAR 센서 융합.</p>
+                <div class="project-tech">
+                    <span>Jetson</span>
+                    <span>ROS2</span>
+                    <span>CUDA</span>
+                </div>
+            </a>
+            <a href="https://github.com/hwkim3330/mujoco-web" class="project-card" target="_blank">
+                <div class="project-header">
+                    <span class="project-icon">🎮</span>
+                    <div class="project-links">
+                        <span class="project-link">↗</span>
                     </div>
-                </a>
-                <a href="https://github.com/hwkim3330/webrtc-mjpge-cbs" class="project-card" target="_blank">
-                    <h3><span class="emoji">📡</span> WebRTC TSN Streaming</h3>
-                    <p>TSN CBS 기반 실시간 영상 스트리밍 - 저지연 WebRTC</p>
-                    <div class="project-tech">
-                        <span>WebRTC</span>
-                        <span>TSN</span>
-                        <span>Node.js</span>
+                </div>
+                <h3>MuJoCo Web</h3>
+                <p>브라우저에서 실행되는 MuJoCo 물리 시뮬레이션. WebAssembly로 포팅.</p>
+                <div class="project-tech">
+                    <span>WASM</span>
+                    <span>Three.js</span>
+                    <span>MuJoCo</span>
+                </div>
+            </a>
+            <a href="https://github.com/hwkim3330/webrtc-mjpge-cbs" class="project-card" target="_blank">
+                <div class="project-header">
+                    <span class="project-icon">📡</span>
+                    <div class="project-links">
+                        <span class="project-link">↗</span>
                     </div>
-                </a>
-                <a href="https://github.com/hwkim3330/safer-v" class="project-card" target="_blank">
-                    <h3><span class="emoji">🚗</span> SAFER-V</h3>
-                    <p>자율주행 안전성 검증 플랫폼 - 시뮬레이션 기반 테스트</p>
-                    <div class="project-tech">
-                        <span>CARLA</span>
-                        <span>Python</span>
-                        <span>Simulation</span>
+                </div>
+                <h3>WebRTC TSN Streaming</h3>
+                <p>TSN CBS 기반 실시간 영상 스트리밍. 저지연 WebRTC 전송.</p>
+                <div class="project-tech">
+                    <span>WebRTC</span>
+                    <span>TSN</span>
+                    <span>Node.js</span>
+                </div>
+            </a>
+            <a href="https://github.com/hwkim3330/safer-v" class="project-card" target="_blank">
+                <div class="project-header">
+                    <span class="project-icon">🚗</span>
+                    <div class="project-links">
+                        <span class="project-link">↗</span>
                     </div>
-                </a>
-            </div>
-        </section>
+                </div>
+                <h3>SAFER-V</h3>
+                <p>자율주행 안전성 검증 플랫폼. 시뮬레이션 기반 시나리오 테스트.</p>
+                <div class="project-tech">
+                    <span>CARLA</span>
+                    <span>Python</span>
+                    <span>Simulation</span>
+                </div>
+            </a>
+        </div>
+    </section>
 
-        <section id="skills">
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-header">
             <h2>Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h4>AI/ML</h4>
-                    <ul>
-                        <li>PyTorch, Transformers</li>
-                        <li>LLM Fine-tuning</li>
-                        <li>Quantization (INT4/8)</li>
-                        <li>Multimodal Models</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h4>Languages</h4>
-                    <ul>
-                        <li>Python</li>
-                        <li>JavaScript/TypeScript</li>
-                        <li>C/C++</li>
-                        <li>Bash</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h4>Networking</h4>
-                    <ul>
-                        <li>TSN (802.1Qav/Qbv)</li>
-                        <li>Real-time Systems</li>
-                        <li>Protocol Analysis</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h4>Tools</h4>
-                    <ul>
-                        <li>Git, Docker</li>
-                        <li>Linux, Embedded</li>
-                        <li>Hugging Face</li>
-                    </ul>
+            <p>기술 스택과 도구들</p>
+        </div>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h4>🤖 AI / ML</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">PyTorch</span>
+                    <span class="skill-tag">Transformers</span>
+                    <span class="skill-tag">LLM</span>
+                    <span class="skill-tag">Diffusion</span>
+                    <span class="skill-tag">LoRA</span>
+                    <span class="skill-tag">Quantization</span>
                 </div>
             </div>
-        </section>
-
-        <section id="contact">
-            <h2>Contact</h2>
-            <div class="contact-box">
-                <p>연구 협업, 프로젝트 제안, 또는 그냥 대화도 환영합니다!</p>
-                <p>
-                    <a href="mailto:hwkim3330@gmail.com">hwkim3330@gmail.com</a>
-                </p>
+            <div class="skill-category">
+                <h4>💻 Languages</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">C/C++</span>
+                    <span class="skill-tag">Rust</span>
+                    <span class="skill-tag">Bash</span>
+                </div>
             </div>
-        </section>
-    </div>
+            <div class="skill-category">
+                <h4>🔧 Robotics</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">ROS2</span>
+                    <span class="skill-tag">Jetson</span>
+                    <span class="skill-tag">CUDA</span>
+                    <span class="skill-tag">MuJoCo</span>
+                    <span class="skill-tag">CARLA</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h4>🌐 Networking</h4>
+                <div class="skill-list">
+                    <span class="skill-tag">TSN</span>
+                    <span class="skill-tag">WebRTC</span>
+                    <span class="skill-tag">Ethernet</span>
+                    <span class="skill-tag">Protocol Analysis</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-section">
+            <h2>Let's Connect</h2>
+            <p>연구 협업, 프로젝트 제안, 또는 그냥 대화도 환영합니다!</p>
+            <div class="contact-links">
+                <a href="mailto:hwkim3330@gmail.com" class="btn btn-primary">
+                    ✉️ Email Me
+                </a>
+                <a href="https://github.com/hwkim3330" target="_blank" class="btn btn-secondary">
+                    GitHub
+                </a>
+                <a href="https://huggingface.co/kimhyunwoo" target="_blank" class="btn btn-secondary">
+                    🤗 Hugging Face
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>© 2025 Hyunwoo Kim · Built with ❤️</p>
+        <p>© 2025 Hyunwoo Kim · Built with ❤️ · <a href="https://github.com/hwkim3330/hwkim3330.github.io">Source</a></p>
     </footer>
 
     <script>
+        // Theme Toggle
         function toggleTheme() {
             const html = document.documentElement;
             const icon = document.getElementById('theme-icon');
@@ -600,158 +987,134 @@
             document.documentElement.setAttribute('data-theme', 'light');
             document.getElementById('theme-icon').textContent = '☀️';
         }
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
     </script>
 
     <!-- D3.js Globe -->
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/topojson-client@3"></script>
     <script>
-        // 방문한 국가 (ISO 3166-1 numeric)
-        const visitedCountries = new Set([
-            '392', // Japan
-            '764', // Thailand
-            '608', // Philippines
-            '203', // Czech Republic
-            '348', // Hungary
-            '040', // Austria
-        ]);
-        const wishlistCountries = new Set([
-            '840', // USA
-        ]);
-        const homeCountry = '410'; // South Korea
+        const visitedCountries = new Set(['392', '764', '608', '203', '348', '040']);
+        const wishlistCountries = new Set(['840']);
+        const homeCountry = '410';
 
         async function initGlobe() {
             const container = document.getElementById('globe');
             if (!container) return;
 
             const width = container.clientWidth;
-            const height = 400;
+            const height = 450;
 
-            // SVG 생성
             const svg = d3.select(container)
                 .append('svg')
                 .attr('width', width)
                 .attr('height', height)
                 .style('cursor', 'grab');
 
-            // 투영 설정 (정사영)
             const projection = d3.geoOrthographic()
-                .scale(height / 2.2)
+                .scale(Math.min(width, height) / 2.2)
                 .translate([width / 2, height / 2])
-                .rotate([-127, -37]); // 한국 중심으로 시작
+                .rotate([-127, -37]);
 
             const path = d3.geoPath().projection(projection);
 
-            // 지구 배경 (바다)
+            // Ocean (바다색)
+            const defs = svg.append('defs');
+            const oceanGradient = defs.append('radialGradient')
+                .attr('id', 'oceanGradient')
+                .attr('cx', '30%')
+                .attr('cy', '30%');
+            oceanGradient.append('stop').attr('offset', '0%').attr('stop-color', '#1e3a5f');
+            oceanGradient.append('stop').attr('offset', '100%').attr('stop-color', '#0c1929');
+
             svg.append('circle')
                 .attr('cx', width / 2)
                 .attr('cy', height / 2)
                 .attr('r', projection.scale())
-                .attr('fill', 'var(--bg-secondary)')
-                .attr('stroke', 'var(--border)')
-                .attr('stroke-width', 1);
+                .attr('fill', 'url(#oceanGradient)')
+                .attr('stroke', '#2563eb')
+                .attr('stroke-width', 2)
+                .attr('stroke-opacity', 0.3);
 
-            // 위도/경도 그리드
+            // Graticule
             const graticule = d3.geoGraticule();
             svg.append('path')
                 .datum(graticule)
+                .attr('class', 'graticule')
                 .attr('d', path)
                 .attr('fill', 'none')
                 .attr('stroke', 'var(--border)')
-                .attr('stroke-width', 0.3)
-                .attr('stroke-opacity', 0.5);
+                .attr('stroke-width', 0.5)
+                .attr('stroke-opacity', 0.3);
 
-            // 국가 데이터 로드
+            // Countries
             const world = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json');
             const countries = topojson.feature(world, world.objects.countries);
 
-            // 국가 색상 결정
-            function getCountryColor(id) {
-                if (id === homeCountry) return 'var(--accent)';
+            function getColor(id) {
+                if (id === homeCountry) return '#3b82f6';
                 if (visitedCountries.has(id)) return '#22c55e';
                 if (wishlistCountries.has(id)) return '#f59e0b';
-                return 'var(--card-bg)';
+                return 'var(--bg-tertiary)';
             }
 
-            function getCountryOpacity(id) {
-                if (id === homeCountry || visitedCountries.has(id) || wishlistCountries.has(id)) return 1;
-                return 0.6;
-            }
-
-            // 국가 그리기
             const countryPaths = svg.selectAll('.country')
                 .data(countries.features)
                 .enter()
                 .append('path')
                 .attr('class', 'country')
                 .attr('d', path)
-                .attr('fill', d => getCountryColor(d.id))
+                .attr('fill', d => getColor(d.id))
                 .attr('stroke', 'var(--border)')
                 .attr('stroke-width', 0.5)
-                .attr('opacity', d => getCountryOpacity(d.id))
-                .style('transition', 'fill 0.2s, opacity 0.2s');
+                .attr('opacity', d => (d.id === homeCountry || visitedCountries.has(d.id) || wishlistCountries.has(d.id)) ? 1 : 0.5);
 
-            // 호버 효과
-            countryPaths
-                .on('mouseenter', function(event, d) {
-                    d3.select(this).attr('opacity', 1).attr('stroke-width', 1);
-                })
-                .on('mouseleave', function(event, d) {
-                    d3.select(this)
-                        .attr('opacity', getCountryOpacity(d.id))
-                        .attr('stroke-width', 0.5);
-                });
-
-            // 드래그 회전
-            let isDragging = false;
+            // Drag rotation
             let rotation = projection.rotate();
+            let isDragging = false;
 
             const drag = d3.drag()
-                .on('start', () => {
-                    isDragging = true;
-                    svg.style('cursor', 'grabbing');
-                })
+                .on('start', () => { isDragging = true; svg.style('cursor', 'grabbing'); })
                 .on('drag', (event) => {
-                    const sensitivity = 0.5;
-                    rotation[0] += event.dx * sensitivity;
-                    rotation[1] -= event.dy * sensitivity;
+                    rotation[0] += event.dx * 0.4;
+                    rotation[1] -= event.dy * 0.4;
                     rotation[1] = Math.max(-90, Math.min(90, rotation[1]));
                     projection.rotate(rotation);
-                    updatePaths();
+                    svg.selectAll('.country').attr('d', path);
+                    svg.selectAll('.graticule').attr('d', path);
                 })
-                .on('end', () => {
-                    isDragging = false;
-                    svg.style('cursor', 'grab');
-                });
+                .on('end', () => { isDragging = false; svg.style('cursor', 'grab'); });
 
             svg.call(drag);
 
-            function updatePaths() {
-                svg.selectAll('.country').attr('d', path);
-                svg.selectAll('.graticule').attr('d', path);
-            }
+            // Auto rotation
+            d3.timer(() => {
+                if (!isDragging) {
+                    rotation[0] += 0.15;
+                    projection.rotate(rotation);
+                    svg.selectAll('.country').attr('d', path);
+                    svg.selectAll('.graticule').attr('d', path);
+                }
+            });
 
-            // 자동 회전
-            let autoRotate;
-            function startAutoRotate() {
-                autoRotate = d3.timer(() => {
-                    if (!isDragging) {
-                        rotation[0] += 0.2;
-                        projection.rotate(rotation);
-                        updatePaths();
-                    }
-                });
-            }
-            startAutoRotate();
-
-            // 반응형
+            // Responsive
             window.addEventListener('resize', () => {
                 const newWidth = container.clientWidth;
                 svg.attr('width', newWidth);
-                projection.translate([newWidth / 2, height / 2]);
-                svg.select('circle')
-                    .attr('cx', newWidth / 2);
-                updatePaths();
+                projection.scale(Math.min(newWidth, height) / 2.2).translate([newWidth / 2, height / 2]);
+                svg.select('circle').attr('cx', newWidth / 2).attr('r', projection.scale());
+                svg.selectAll('.country').attr('d', path);
+                svg.selectAll('.graticule').attr('d', path);
             });
         }
 
