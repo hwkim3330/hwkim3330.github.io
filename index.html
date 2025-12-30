@@ -302,6 +302,78 @@
             font-style: normal;
         }
 
+        /* Globe / Travel Section */
+        .globe-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        #globe {
+            width: 100%;
+            height: 400px;
+            cursor: grab;
+        }
+
+        #globe:active {
+            cursor: grabbing;
+        }
+
+        .travel-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .travel-stat {
+            text-align: center;
+        }
+
+        .travel-stat .number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .travel-stat .label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .travel-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .travel-list .country {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .travel-list .country.visited {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .travel-list .country.wishlist {
+            border-color: #f59e0b;
+            color: #f59e0b;
+            opacity: 0.8;
+        }
+
         @media (max-width: 640px) {
             .container {
                 padding: 2rem 1rem;
@@ -330,7 +402,7 @@
             </p>
             <div class="social-links">
                 <a href="https://github.com/hwkim3330" target="_blank">GitHub</a>
-                <a href="https://huggingface.co/hwkim3330" target="_blank">Hugging Face</a>
+                <a href="https://huggingface.co/kimhyunwoo" target="_blank">Hugging Face</a>
                 <a href="mailto:hwkim3330@gmail.com">Email</a>
             </div>
         </header>
@@ -361,34 +433,91 @@
             </div>
         </section>
 
+        <section id="travels">
+            <h2>Travels</h2>
+            <div class="globe-container">
+                <div id="globe"></div>
+                <div class="travel-stats">
+                    <div class="travel-stat">
+                        <div class="number">6</div>
+                        <div class="label">Countries</div>
+                    </div>
+                    <div class="travel-stat">
+                        <div class="number">2</div>
+                        <div class="label">Continents</div>
+                    </div>
+                    <div class="travel-stat">
+                        <div class="number">1</div>
+                        <div class="label">Wishlist</div>
+                    </div>
+                </div>
+                <div class="travel-list">
+                    <span class="country visited">🇯🇵 Japan</span>
+                    <span class="country visited">🇹🇭 Thailand</span>
+                    <span class="country visited">🇵🇭 Philippines</span>
+                    <span class="country visited">🇨🇿 Czech Republic</span>
+                    <span class="country visited">🇭🇺 Hungary</span>
+                    <span class="country visited">🇦🇹 Austria</span>
+                    <span class="country wishlist">🇺🇸 USA ✨</span>
+                </div>
+            </div>
+        </section>
+
         <section id="projects">
             <h2>Projects</h2>
             <div class="projects-grid">
                 <a href="https://github.com/hwkim3330/naver" class="project-card" target="_blank">
                     <h3><span class="emoji">🧠</span> HyperCLOVAX Analysis</h3>
-                    <p>Naver HyperCLOVAX-SEED-Omni-8B 모델의 신경망 구조 분석 및 최적화 가이드</p>
+                    <p>Naver HyperCLOVAX-SEED-Omni-8B 멀티모달 모델 신경망 구조 분석 및 최적화</p>
                     <div class="project-tech">
                         <span>PyTorch</span>
                         <span>Transformers</span>
-                        <span>Mamba</span>
+                        <span>Mamba2</span>
                     </div>
                 </a>
-                <a href="https://github.com/hwkim3330" class="project-card" target="_blank">
-                    <h3><span class="emoji">🤖</span> Hybrid AI Agent</h3>
-                    <p>마이크 청취, 도구 실행, 자가 학습이 가능한 실시간 AI 에이전트</p>
+                <a href="https://github.com/hwkim3330/lnn" class="project-card" target="_blank">
+                    <h3><span class="emoji">🌊</span> Liquid Neural Networks</h3>
+                    <p>MIT CSAIL의 LNN 구현 - 시계열 예측 및 연속 시간 신경망 연구</p>
                     <div class="project-tech">
                         <span>Python</span>
-                        <span>Ollama</span>
-                        <span>Speech Recognition</span>
+                        <span>PyTorch</span>
+                        <span>ODE Solver</span>
                     </div>
                 </a>
-                <a href="https://github.com/hwkim3330" class="project-card" target="_blank">
-                    <h3><span class="emoji">📡</span> TSN Performance Suite</h3>
-                    <p>IEEE 802.1 TSN 프로토콜 성능 테스트 및 시각화 도구</p>
+                <a href="https://github.com/hwkim3330/jetson_robot" class="project-card" target="_blank">
+                    <h3><span class="emoji">🤖</span> Jetson Robot</h3>
+                    <p>NVIDIA Jetson 기반 자율주행 로봇 - ROS2, 카메라, LiDAR 통합</p>
                     <div class="project-tech">
+                        <span>Jetson</span>
+                        <span>ROS2</span>
+                        <span>CUDA</span>
+                    </div>
+                </a>
+                <a href="https://github.com/hwkim3330/mujoco-web" class="project-card" target="_blank">
+                    <h3><span class="emoji">🎮</span> MuJoCo Web</h3>
+                    <p>브라우저에서 실행되는 MuJoCo 물리 시뮬레이션 - WebAssembly 포팅</p>
+                    <div class="project-tech">
+                        <span>WASM</span>
+                        <span>Three.js</span>
+                        <span>MuJoCo</span>
+                    </div>
+                </a>
+                <a href="https://github.com/hwkim3330/webrtc-mjpge-cbs" class="project-card" target="_blank">
+                    <h3><span class="emoji">📡</span> WebRTC TSN Streaming</h3>
+                    <p>TSN CBS 기반 실시간 영상 스트리밍 - 저지연 WebRTC</p>
+                    <div class="project-tech">
+                        <span>WebRTC</span>
+                        <span>TSN</span>
+                        <span>Node.js</span>
+                    </div>
+                </a>
+                <a href="https://github.com/hwkim3330/safer-v" class="project-card" target="_blank">
+                    <h3><span class="emoji">🚗</span> SAFER-V</h3>
+                    <p>자율주행 안전성 검증 플랫폼 - 시뮬레이션 기반 테스트</p>
+                    <div class="project-tech">
+                        <span>CARLA</span>
                         <span>Python</span>
-                        <span>Scapy</span>
-                        <span>Plotly</span>
+                        <span>Simulation</span>
                     </div>
                 </a>
             </div>
@@ -471,6 +600,156 @@
             document.documentElement.setAttribute('data-theme', 'light');
             document.getElementById('theme-icon').textContent = '☀️';
         }
+    </script>
+
+    <!-- 3D Globe -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+        // 여행한 국가 좌표
+        const visitedPlaces = [
+            { name: "Korea", lat: 37.5665, lng: 126.9780, color: 0x22c55e },
+            { name: "Japan", lat: 35.6762, lng: 139.6503, color: 0x3b82f6 },
+            { name: "Thailand", lat: 13.7563, lng: 100.5018, color: 0x3b82f6 },
+            { name: "Philippines", lat: 14.5995, lng: 120.9842, color: 0x3b82f6 },
+            { name: "Czech", lat: 50.0755, lng: 14.4378, color: 0x3b82f6 },
+            { name: "Hungary", lat: 47.4979, lng: 19.0402, color: 0x3b82f6 },
+            { name: "Austria", lat: 48.2082, lng: 16.3738, color: 0x3b82f6 },
+            { name: "USA", lat: 37.0902, lng: -95.7129, color: 0xf59e0b }, // wishlist
+        ];
+
+        function initGlobe() {
+            const container = document.getElementById('globe');
+            if (!container) return;
+
+            const width = container.clientWidth;
+            const height = 400;
+
+            // Scene
+            const scene = new THREE.Scene();
+
+            // Camera
+            const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+            camera.position.z = 2.5;
+
+            // Renderer
+            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            renderer.setSize(width, height);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Globe
+            const geometry = new THREE.SphereGeometry(1, 64, 64);
+
+            // 지구 텍스처 (간단한 와이어프레임)
+            const material = new THREE.MeshBasicMaterial({
+                color: 0x1a1a2e,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.3
+            });
+            const globe = new THREE.Mesh(geometry, material);
+            scene.add(globe);
+
+            // 내부 구체 (solid)
+            const innerGeometry = new THREE.SphereGeometry(0.98, 32, 32);
+            const innerMaterial = new THREE.MeshBasicMaterial({
+                color: 0x0f0f1a,
+            });
+            const innerGlobe = new THREE.Mesh(innerGeometry, innerMaterial);
+            scene.add(innerGlobe);
+
+            // 방문한 위치에 점 추가
+            visitedPlaces.forEach(place => {
+                const pointGeometry = new THREE.SphereGeometry(0.03, 16, 16);
+                const pointMaterial = new THREE.MeshBasicMaterial({ color: place.color });
+                const point = new THREE.Mesh(pointGeometry, pointMaterial);
+
+                // 위도/경도를 3D 좌표로 변환
+                const phi = (90 - place.lat) * (Math.PI / 180);
+                const theta = (place.lng + 180) * (Math.PI / 180);
+
+                point.position.x = -1 * Math.sin(phi) * Math.cos(theta);
+                point.position.y = Math.cos(phi);
+                point.position.z = Math.sin(phi) * Math.sin(theta);
+
+                scene.add(point);
+
+                // 글로우 효과
+                const glowGeometry = new THREE.SphereGeometry(0.05, 16, 16);
+                const glowMaterial = new THREE.MeshBasicMaterial({
+                    color: place.color,
+                    transparent: true,
+                    opacity: 0.3
+                });
+                const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+                glow.position.copy(point.position);
+                scene.add(glow);
+            });
+
+            // 마우스 인터랙션
+            let isDragging = false;
+            let previousMousePosition = { x: 0, y: 0 };
+
+            container.addEventListener('mousedown', () => isDragging = true);
+            container.addEventListener('mouseup', () => isDragging = false);
+            container.addEventListener('mouseleave', () => isDragging = false);
+
+            container.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+
+                const deltaMove = {
+                    x: e.offsetX - previousMousePosition.x,
+                    y: e.offsetY - previousMousePosition.y
+                };
+
+                globe.rotation.y += deltaMove.x * 0.005;
+                globe.rotation.x += deltaMove.y * 0.005;
+                innerGlobe.rotation.y += deltaMove.x * 0.005;
+                innerGlobe.rotation.x += deltaMove.y * 0.005;
+
+                previousMousePosition = { x: e.offsetX, y: e.offsetY };
+            });
+
+            container.addEventListener('mousemove', (e) => {
+                previousMousePosition = { x: e.offsetX, y: e.offsetY };
+            });
+
+            // 애니메이션
+            function animate() {
+                requestAnimationFrame(animate);
+
+                if (!isDragging) {
+                    globe.rotation.y += 0.002;
+                    innerGlobe.rotation.y += 0.002;
+                }
+
+                // 점들도 같이 회전
+                scene.children.forEach(child => {
+                    if (child !== globe && child !== innerGlobe && child !== camera) {
+                        if (!isDragging) {
+                            // 구 표면의 점들 회전
+                            const axis = new THREE.Vector3(0, 1, 0);
+                            child.position.applyAxisAngle(axis, 0.002);
+                        }
+                    }
+                });
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // 반응형
+            window.addEventListener('resize', () => {
+                const newWidth = container.clientWidth;
+                camera.aspect = newWidth / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(newWidth, height);
+            });
+        }
+
+        // 페이지 로드 후 초기화
+        window.addEventListener('load', initGlobe);
     </script>
 </body>
 </html>
