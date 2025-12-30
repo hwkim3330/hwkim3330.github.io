@@ -602,153 +602,159 @@
         }
     </script>
 
-    <!-- 3D Globe -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- D3.js Globe -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
     <script>
-        // 여행한 국가 좌표
-        const visitedPlaces = [
-            { name: "Korea", lat: 37.5665, lng: 126.9780, color: 0x22c55e },
-            { name: "Japan", lat: 35.6762, lng: 139.6503, color: 0x3b82f6 },
-            { name: "Thailand", lat: 13.7563, lng: 100.5018, color: 0x3b82f6 },
-            { name: "Philippines", lat: 14.5995, lng: 120.9842, color: 0x3b82f6 },
-            { name: "Czech", lat: 50.0755, lng: 14.4378, color: 0x3b82f6 },
-            { name: "Hungary", lat: 47.4979, lng: 19.0402, color: 0x3b82f6 },
-            { name: "Austria", lat: 48.2082, lng: 16.3738, color: 0x3b82f6 },
-            { name: "USA", lat: 37.0902, lng: -95.7129, color: 0xf59e0b }, // wishlist
-        ];
+        // 방문한 국가 (ISO 3166-1 numeric)
+        const visitedCountries = new Set([
+            '392', // Japan
+            '764', // Thailand
+            '608', // Philippines
+            '203', // Czech Republic
+            '348', // Hungary
+            '040', // Austria
+        ]);
+        const wishlistCountries = new Set([
+            '840', // USA
+        ]);
+        const homeCountry = '410'; // South Korea
 
-        function initGlobe() {
+        async function initGlobe() {
             const container = document.getElementById('globe');
             if (!container) return;
 
             const width = container.clientWidth;
             const height = 400;
 
-            // Scene
-            const scene = new THREE.Scene();
+            // SVG 생성
+            const svg = d3.select(container)
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .style('cursor', 'grab');
 
-            // Camera
-            const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-            camera.position.z = 2.5;
+            // 투영 설정 (정사영)
+            const projection = d3.geoOrthographic()
+                .scale(height / 2.2)
+                .translate([width / 2, height / 2])
+                .rotate([-127, -37]); // 한국 중심으로 시작
 
-            // Renderer
-            const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(width, height);
-            renderer.setPixelRatio(window.devicePixelRatio);
-            container.appendChild(renderer.domElement);
+            const path = d3.geoPath().projection(projection);
 
-            // Globe
-            const geometry = new THREE.SphereGeometry(1, 64, 64);
+            // 지구 배경 (바다)
+            svg.append('circle')
+                .attr('cx', width / 2)
+                .attr('cy', height / 2)
+                .attr('r', projection.scale())
+                .attr('fill', 'var(--bg-secondary)')
+                .attr('stroke', 'var(--border)')
+                .attr('stroke-width', 1);
 
-            // 지구 텍스처 (간단한 와이어프레임)
-            const material = new THREE.MeshBasicMaterial({
-                color: 0x1a1a2e,
-                wireframe: true,
-                transparent: true,
-                opacity: 0.3
-            });
-            const globe = new THREE.Mesh(geometry, material);
-            scene.add(globe);
+            // 위도/경도 그리드
+            const graticule = d3.geoGraticule();
+            svg.append('path')
+                .datum(graticule)
+                .attr('d', path)
+                .attr('fill', 'none')
+                .attr('stroke', 'var(--border)')
+                .attr('stroke-width', 0.3)
+                .attr('stroke-opacity', 0.5);
 
-            // 내부 구체 (solid)
-            const innerGeometry = new THREE.SphereGeometry(0.98, 32, 32);
-            const innerMaterial = new THREE.MeshBasicMaterial({
-                color: 0x0f0f1a,
-            });
-            const innerGlobe = new THREE.Mesh(innerGeometry, innerMaterial);
-            scene.add(innerGlobe);
+            // 국가 데이터 로드
+            const world = await d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json');
+            const countries = topojson.feature(world, world.objects.countries);
 
-            // 방문한 위치에 점 추가
-            visitedPlaces.forEach(place => {
-                const pointGeometry = new THREE.SphereGeometry(0.03, 16, 16);
-                const pointMaterial = new THREE.MeshBasicMaterial({ color: place.color });
-                const point = new THREE.Mesh(pointGeometry, pointMaterial);
-
-                // 위도/경도를 3D 좌표로 변환
-                const phi = (90 - place.lat) * (Math.PI / 180);
-                const theta = (place.lng + 180) * (Math.PI / 180);
-
-                point.position.x = -1 * Math.sin(phi) * Math.cos(theta);
-                point.position.y = Math.cos(phi);
-                point.position.z = Math.sin(phi) * Math.sin(theta);
-
-                scene.add(point);
-
-                // 글로우 효과
-                const glowGeometry = new THREE.SphereGeometry(0.05, 16, 16);
-                const glowMaterial = new THREE.MeshBasicMaterial({
-                    color: place.color,
-                    transparent: true,
-                    opacity: 0.3
-                });
-                const glow = new THREE.Mesh(glowGeometry, glowMaterial);
-                glow.position.copy(point.position);
-                scene.add(glow);
-            });
-
-            // 마우스 인터랙션
-            let isDragging = false;
-            let previousMousePosition = { x: 0, y: 0 };
-
-            container.addEventListener('mousedown', () => isDragging = true);
-            container.addEventListener('mouseup', () => isDragging = false);
-            container.addEventListener('mouseleave', () => isDragging = false);
-
-            container.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-
-                const deltaMove = {
-                    x: e.offsetX - previousMousePosition.x,
-                    y: e.offsetY - previousMousePosition.y
-                };
-
-                globe.rotation.y += deltaMove.x * 0.005;
-                globe.rotation.x += deltaMove.y * 0.005;
-                innerGlobe.rotation.y += deltaMove.x * 0.005;
-                innerGlobe.rotation.x += deltaMove.y * 0.005;
-
-                previousMousePosition = { x: e.offsetX, y: e.offsetY };
-            });
-
-            container.addEventListener('mousemove', (e) => {
-                previousMousePosition = { x: e.offsetX, y: e.offsetY };
-            });
-
-            // 애니메이션
-            function animate() {
-                requestAnimationFrame(animate);
-
-                if (!isDragging) {
-                    globe.rotation.y += 0.002;
-                    innerGlobe.rotation.y += 0.002;
-                }
-
-                // 점들도 같이 회전
-                scene.children.forEach(child => {
-                    if (child !== globe && child !== innerGlobe && child !== camera) {
-                        if (!isDragging) {
-                            // 구 표면의 점들 회전
-                            const axis = new THREE.Vector3(0, 1, 0);
-                            child.position.applyAxisAngle(axis, 0.002);
-                        }
-                    }
-                });
-
-                renderer.render(scene, camera);
+            // 국가 색상 결정
+            function getCountryColor(id) {
+                if (id === homeCountry) return 'var(--accent)';
+                if (visitedCountries.has(id)) return '#22c55e';
+                if (wishlistCountries.has(id)) return '#f59e0b';
+                return 'var(--card-bg)';
             }
 
-            animate();
+            function getCountryOpacity(id) {
+                if (id === homeCountry || visitedCountries.has(id) || wishlistCountries.has(id)) return 1;
+                return 0.6;
+            }
+
+            // 국가 그리기
+            const countryPaths = svg.selectAll('.country')
+                .data(countries.features)
+                .enter()
+                .append('path')
+                .attr('class', 'country')
+                .attr('d', path)
+                .attr('fill', d => getCountryColor(d.id))
+                .attr('stroke', 'var(--border)')
+                .attr('stroke-width', 0.5)
+                .attr('opacity', d => getCountryOpacity(d.id))
+                .style('transition', 'fill 0.2s, opacity 0.2s');
+
+            // 호버 효과
+            countryPaths
+                .on('mouseenter', function(event, d) {
+                    d3.select(this).attr('opacity', 1).attr('stroke-width', 1);
+                })
+                .on('mouseleave', function(event, d) {
+                    d3.select(this)
+                        .attr('opacity', getCountryOpacity(d.id))
+                        .attr('stroke-width', 0.5);
+                });
+
+            // 드래그 회전
+            let isDragging = false;
+            let rotation = projection.rotate();
+
+            const drag = d3.drag()
+                .on('start', () => {
+                    isDragging = true;
+                    svg.style('cursor', 'grabbing');
+                })
+                .on('drag', (event) => {
+                    const sensitivity = 0.5;
+                    rotation[0] += event.dx * sensitivity;
+                    rotation[1] -= event.dy * sensitivity;
+                    rotation[1] = Math.max(-90, Math.min(90, rotation[1]));
+                    projection.rotate(rotation);
+                    updatePaths();
+                })
+                .on('end', () => {
+                    isDragging = false;
+                    svg.style('cursor', 'grab');
+                });
+
+            svg.call(drag);
+
+            function updatePaths() {
+                svg.selectAll('.country').attr('d', path);
+                svg.selectAll('.graticule').attr('d', path);
+            }
+
+            // 자동 회전
+            let autoRotate;
+            function startAutoRotate() {
+                autoRotate = d3.timer(() => {
+                    if (!isDragging) {
+                        rotation[0] += 0.2;
+                        projection.rotate(rotation);
+                        updatePaths();
+                    }
+                });
+            }
+            startAutoRotate();
 
             // 반응형
             window.addEventListener('resize', () => {
                 const newWidth = container.clientWidth;
-                camera.aspect = newWidth / height;
-                camera.updateProjectionMatrix();
-                renderer.setSize(newWidth, height);
+                svg.attr('width', newWidth);
+                projection.translate([newWidth / 2, height / 2]);
+                svg.select('circle')
+                    .attr('cx', newWidth / 2);
+                updatePaths();
             });
         }
 
-        // 페이지 로드 후 초기화
         window.addEventListener('load', initGlobe);
     </script>
 </body>
