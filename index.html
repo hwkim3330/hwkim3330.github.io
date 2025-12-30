@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hyunwoo Kim | AGI Researcher</title>
+    <meta name="description" content="AGI Researcher, Builder, Open Source Advocate">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --bg-secondary: #111111;
+            --text: #e5e5e5;
+            --text-secondary: #888888;
+            --accent: #3b82f6;
+            --accent-hover: #60a5fa;
+            --border: #222222;
+            --card-bg: #151515;
+        }
+
+        [data-theme="light"] {
+            --bg: #fafafa;
+            --bg-secondary: #ffffff;
+            --text: #171717;
+            --text-secondary: #525252;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border: #e5e5e5;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        header {
+            margin-bottom: 4rem;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+        .theme-toggle {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.2s;
+        }
+
+        .theme-toggle:hover {
+            border-color: var(--accent);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tagline {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .intro {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .social-links a:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .research-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .research-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .research-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .research-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .research-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .research-item .tag {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            display: block;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .project-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .project-tech span {
+            background: var(--bg);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--text-secondary);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .skill-category h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 0.3rem 0;
+            font-size: 0.95rem;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, var(--card-bg), var(--bg-secondary));
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .contact-box p {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .contact-box a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .emoji {
+            font-style: normal;
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="avatar">HK</div>
+                <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+                    <span id="theme-icon">🌙</span>
+                </button>
+            </div>
+            <h1>Hyunwoo Kim</h1>
+            <p class="tagline">AGI Researcher · Builder · Open Source Advocate</p>
+            <p class="intro">
+                안녕하세요! 저는 <strong>범용 인공지능(AGI)</strong>을 연구하는 개발자입니다.
+                멀티모달 AI, 신경망 아키텍처, 그리고 자율 에이전트 시스템에 관심을 갖고 있습니다.
+                현재 한국에서 활동하며, 오픈소스 AI 생태계에 기여하고 있습니다.
+            </p>
+            <div class="social-links">
+                <a href="https://github.com/hwkim3330" target="_blank">GitHub</a>
+                <a href="https://huggingface.co/hwkim3330" target="_blank">Hugging Face</a>
+                <a href="mailto:hwkim3330@gmail.com">Email</a>
+            </div>
+        </header>
+
+        <section id="research">
+            <h2>Research Interests</h2>
+            <div class="research-grid">
+                <div class="research-item">
+                    <span class="tag">F1</span>
+                    <h3>Multimodal AGI Architecture</h3>
+                    <p>Vision, Audio, Text를 통합하는 Any-to-Any 모델 아키텍처 연구. HyperCLOVAX, Qwen-Omni 등 분석.</p>
+                </div>
+                <div class="research-item">
+                    <span class="tag">F2</span>
+                    <h3>Efficient Neural Networks</h3>
+                    <p>INT4/INT8 양자화, CPU-GPU 하이브리드 추론, 동적 레이어 로딩을 통한 저사양 환경 최적화.</p>
+                </div>
+                <div class="research-item">
+                    <span class="tag">F3</span>
+                    <h3>Autonomous AI Agents</h3>
+                    <p>도구 사용, 자가 학습, 재귀적 자기 개선이 가능한 에이전트 시스템 개발.</p>
+                </div>
+                <div class="research-item">
+                    <span class="tag">F4</span>
+                    <h3>Time-Sensitive Networking</h3>
+                    <p>IEEE 802.1 TSN 프로토콜 (CBS, TAS, FRER) 연구 및 실시간 네트워크 성능 분석.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <a href="https://github.com/hwkim3330/naver" class="project-card" target="_blank">
+                    <h3><span class="emoji">🧠</span> HyperCLOVAX Analysis</h3>
+                    <p>Naver HyperCLOVAX-SEED-Omni-8B 모델의 신경망 구조 분석 및 최적화 가이드</p>
+                    <div class="project-tech">
+                        <span>PyTorch</span>
+                        <span>Transformers</span>
+                        <span>Mamba</span>
+                    </div>
+                </a>
+                <a href="https://github.com/hwkim3330" class="project-card" target="_blank">
+                    <h3><span class="emoji">🤖</span> Hybrid AI Agent</h3>
+                    <p>마이크 청취, 도구 실행, 자가 학습이 가능한 실시간 AI 에이전트</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Ollama</span>
+                        <span>Speech Recognition</span>
+                    </div>
+                </a>
+                <a href="https://github.com/hwkim3330" class="project-card" target="_blank">
+                    <h3><span class="emoji">📡</span> TSN Performance Suite</h3>
+                    <p>IEEE 802.1 TSN 프로토콜 성능 테스트 및 시각화 도구</p>
+                    <div class="project-tech">
+                        <span>Python</span>
+                        <span>Scapy</span>
+                        <span>Plotly</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h4>AI/ML</h4>
+                    <ul>
+                        <li>PyTorch, Transformers</li>
+                        <li>LLM Fine-tuning</li>
+                        <li>Quantization (INT4/8)</li>
+                        <li>Multimodal Models</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>Languages</h4>
+                    <ul>
+                        <li>Python</li>
+                        <li>JavaScript/TypeScript</li>
+                        <li>C/C++</li>
+                        <li>Bash</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>Networking</h4>
+                    <ul>
+                        <li>TSN (802.1Qav/Qbv)</li>
+                        <li>Real-time Systems</li>
+                        <li>Protocol Analysis</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h4>Tools</h4>
+                    <ul>
+                        <li>Git, Docker</li>
+                        <li>Linux, Embedded</li>
+                        <li>Hugging Face</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact</h2>
+            <div class="contact-box">
+                <p>연구 협업, 프로젝트 제안, 또는 그냥 대화도 환영합니다!</p>
+                <p>
+                    <a href="mailto:hwkim3330@gmail.com">hwkim3330@gmail.com</a>
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>© 2025 Hyunwoo Kim · Built with ❤️</p>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+
+            if (html.getAttribute('data-theme') === 'light') {
+                html.removeAttribute('data-theme');
+                icon.textContent = '🌙';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.setAttribute('data-theme', 'light');
+                icon.textContent = '☀️';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.getElementById('theme-icon').textContent = '☀️';
+        }
+    </script>
+</body>
+</html>
