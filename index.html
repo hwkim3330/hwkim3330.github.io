@@ -361,6 +361,7 @@
             text-decoration: none;
             font-size: 0.875rem;
             font-weight: 500;
+            margin-right: 1rem;
         }
 
         .project-link:hover {
@@ -446,8 +447,9 @@
                 <h2>About me</h2>
                 <p>
                     Hi, I'm <strong>Hyunwoo Kim</strong> — a researcher and engineer passionate about AGI,
-                    real-time networked systems, and robotics. I work at KETI where I develop
-                    Time-Sensitive Networking (TSN) solutions for automotive and industrial applications.
+                    real-time networked systems, and robotics. I work at KETI on
+                    Time-Sensitive Networking (TSN) and in-vehicle networks for automotive and industrial applications.
+                    On my own time I build measured experiments in ML systems, world models and connectome-driven robotics.
                 </p>
                 <p>
                     My research spans from low-level embedded systems to high-level AI architectures.
@@ -467,7 +469,7 @@
                         </button>
                         <div class="accordion-content">
                             IEEE 802.1 TSN standards for deterministic networking. Working on CBS, TAS, FRER implementations
-                            for automotive Ethernet. Developed TSN-Traffic-Tester and various performance analysis tools.
+                            for automotive Ethernet and in-vehicle networks for software-defined vehicles.
                         </div>
                     </div>
                     <div class="accordion-item">
@@ -535,16 +537,82 @@
                 <div class="projects-grid">
                     <div class="project-card">
                         <div class="project-header">
-                            <span class="project-title">TSN-Traffic-Tester</span>
-                            <span class="project-stars">&#9733; 2</span>
+                            <span class="project-title">flyworker</span>
                         </div>
-                        <p class="project-desc">Comprehensive TSN performance testing suite for CBS, TAS, and FRER</p>
+                        <p class="project-desc">QA fuzzer for browser games with deterministic bug rules and replayable reports; one policy is the FlyWire fruit-fly connectome (138,639 neurons), benchmarked against random baselines.</p>
+                        <div class="project-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Connectome</span>
+                            <span class="tag">QA</span>
+                        </div>
+                        <a href="https://hwkim3330.github.io/flyworker/" class="project-link" target="_blank">Live demo &rarr;</a>
+                        <a href="https://github.com/hwkim3330/flyworker" class="project-link" target="_blank">View on GitHub &rarr;</a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <span class="project-title">gta6-world</span>
+                        </div>
+                        <p class="project-desc">Driving an open world model from one game frame on a single RTX 3090: 1-step LoRA distillation, upscaling, frame interpolation, every claim measured.</p>
                         <div class="project-tags">
                             <span class="tag">Python</span>
-                            <span class="tag">TSN</span>
-                            <span class="tag">Networking</span>
+                            <span class="tag">World Models</span>
+                            <span class="tag">Diffusion</span>
                         </div>
-                        <a href="https://github.com/hwkim3330/TSN-Traffic-Tester" class="project-link" target="_blank">View on GitHub &rarr;</a>
+                        <a href="https://github.com/hwkim3330/gta6-world" class="project-link" target="_blank">View on GitHub &rarr;</a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <span class="project-title">model-as-codec</span>
+                        </div>
+                        <p class="project-desc">How much a shared generative model really saves in transmission, and what it loses: VAE video, EnCodec/DAC audio and MIDI vs x264/Opus.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Compression</span>
+                            <span class="tag">Audio</span>
+                        </div>
+                        <a href="https://github.com/hwkim3330/model-as-codec" class="project-link" target="_blank">View on GitHub &rarr;</a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <span class="project-title">pluto-re</span>
+                        </div>
+                        <p class="project-desc">Reverse-engineering notes on a binary-only StarCraft: BW AI, including a reconstruction of its 315M-parameter int8 model.</p>
+                        <div class="project-tags">
+                            <span class="tag">Ghidra</span>
+                            <span class="tag">Game AI</span>
+                            <span class="tag">RE</span>
+                        </div>
+                        <a href="https://github.com/hwkim3330/pluto-re" class="project-link" target="_blank">View on GitHub &rarr;</a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <span class="project-title">seamcheck</span>
+                        </div>
+                        <p class="project-desc">Vesuvius Challenge Open Problem #3: detects sheet switches in papyrus surface traces, CPU-only.</p>
+                        <div class="project-tags">
+                            <span class="tag">Python</span>
+                            <span class="tag">Geometry</span>
+                            <span class="tag">Vesuvius</span>
+                        </div>
+                        <a href="https://github.com/hwkim3330/seamcheck" class="project-link" target="_blank">View on GitHub &rarr;</a>
+                    </div>
+
+                    <div class="project-card">
+                        <div class="project-header">
+                            <span class="project-title">micro-x</span>
+                        </div>
+                        <p class="project-desc">Independently designed 14-servo small biped robot: original CAD, MuJoCo model, measured joint travel and balance. Digitally verified.</p>
+                        <div class="project-tags">
+                            <span class="tag">CAD</span>
+                            <span class="tag">MuJoCo</span>
+                            <span class="tag">Robotics</span>
+                        </div>
+                        <a href="https://hwkim3330.github.io/micro-x/web/" class="project-link" target="_blank">Live demo &rarr;</a>
+                        <a href="https://github.com/hwkim3330/micro-x" class="project-link" target="_blank">View on GitHub &rarr;</a>
                     </div>
 
                     <div class="project-card">
@@ -589,19 +657,6 @@
 
                     <div class="project-card">
                         <div class="project-header">
-                            <span class="project-title">microchip-velocitydrive-lan9662</span>
-                        </div>
-                        <p class="project-desc">Web-based control interface for LAN9662 TSN switch</p>
-                        <div class="project-tags">
-                            <span class="tag">JavaScript</span>
-                            <span class="tag">WebSerial</span>
-                            <span class="tag">TSN</span>
-                        </div>
-                        <a href="https://github.com/hwkim3330/microchip-velocitydrive-lan9662" class="project-link" target="_blank">View on GitHub &rarr;</a>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-header">
                             <span class="project-title">mujoco-web</span>
                         </div>
                         <p class="project-desc">MuJoCo physics simulation running in the browser</p>
@@ -611,19 +666,6 @@
                             <span class="tag">Simulation</span>
                         </div>
                         <a href="https://github.com/hwkim3330/mujoco-web" class="project-link" target="_blank">View on GitHub &rarr;</a>
-                    </div>
-
-                    <div class="project-card">
-                        <div class="project-header">
-                            <span class="project-title">tsn-frer-automotive-redundancy</span>
-                        </div>
-                        <p class="project-desc">IEEE 802.1CB FRER implementation for automotive networks</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">TSN</span>
-                            <span class="tag">Automotive</span>
-                        </div>
-                        <a href="https://github.com/hwkim3330/tsn-frer-automotive-redundancy" class="project-link" target="_blank">View on GitHub &rarr;</a>
                     </div>
 
                     <div class="project-card">
